@@ -12,6 +12,16 @@ const App = () => {
     })
     .catch((err)=>console.log(err))
   }
+  const downloadQRCode = () => {
+    if (shortUrl.qrCodeImg) {
+      const link = document.createElement('a');
+      link.href = shortUrl.qrCodeImg;
+      link.download = 'qr_code.png';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full">
@@ -51,6 +61,12 @@ const App = () => {
               {shortUrl.qrCodeImg && (
                 <div className="flex justify-center mt-4">
                   <img src={shortUrl.qrCodeImg} alt="Generated QR Code" className="max-w-[150px]"/>
+                  <button
+                    onClick={downloadQRCode}
+                    className=""
+                  >
+               <img src="/includes/download.png" alt="Download Icon" style={{ width: '40px', height: '40px'}} />
+                  </button>
                 </div>
               )}
             </div>
